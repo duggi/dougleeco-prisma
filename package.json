@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@pothos/core": "^3.29.0",
+    "@pothos/plugin-prisma": "^3.47.1",
     "@prisma/client": "^4.12.0",
     "@types/node": "18.15.10",
     "@types/react": "18.0.29",
