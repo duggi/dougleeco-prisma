@@ -2,8 +2,9 @@
 
 import SchemaBuilder from "@pothos/core";
 import PrismaPlugin from '@pothos/plugin-prisma';
-import type PrismaTypes from '@pothos/plugin-prisma/generated';
 import prisma from "../lib/prisma";
+import type PrismaTypes from '@pothos/plugin-prisma/generated';
+import RelayPlugin from '@pothos/plugin-relay'
 
 // create schemabuilder instance
 export const builder = new SchemaBuilder<{
@@ -11,7 +12,8 @@ export const builder = new SchemaBuilder<{
   PrismaTypes: PrismaTypes
 }>({
   // schemabuilder options
-  plugins: [PrismaPlugin],
+  plugins: [PrismaPlugin, RelayPlugin],
+  relayOptions: {},
   prisma: {
     client: prisma,
   }
