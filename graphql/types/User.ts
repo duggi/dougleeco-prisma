@@ -5,6 +5,7 @@ import { builder } from "../builder";
 builder.prismaObject('User', {
   fields: (t) => ({
     id: t.exposeID('id'),
+    uuid: t.exposeString('uuid'),
     email: t.exposeString('email'),
     role: t.expose('role', { type: Role, }),
     items: t.relation('items'),
