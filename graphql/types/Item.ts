@@ -4,6 +4,7 @@ import { builder } from "../builder";
 builder.prismaObject('Item', {
   fields: (t) => ({
     id: t.exposeID('id'),
+    uuid: t.exposeString('uuid'),
     title: t.exposeString('title'),
     slug: t.exposeString('slug'),
     description: t.exposeString('description'),
@@ -14,8 +15,9 @@ builder.prismaObject('Item', {
 
 // query
 builder.queryField("items", (t) =>
-  t.prismaField({
-    type: ['Item'],
+  t.prismaConnection({
+    type: 'Item',
+    cursor: 'id',
     resolve: (query, _parent, _args, _ctx, _info) =>
       prisma.item.findMany({ ...query })
   })

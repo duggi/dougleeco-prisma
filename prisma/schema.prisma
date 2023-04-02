@@ -16,7 +16,8 @@ generator pothos {
 
 
 model User {
-  id        String      @id @default(uuid())
+  id        Int         @id @default(autoincrement())
+  uuid      String      @default(uuid())
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   role      Role        @default(USER)
@@ -31,12 +32,13 @@ enum Role {
 }
 
 model Item {
-  id          String      @id @default(uuid())
+  id          Int         @id @default(autoincrement())
+  uuid        String      @default(uuid())
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   title       String      @db.VarChar(255)
   slug        String
   description String?
   user        User        @relation(fields: [userId], references: [id])
-  userId      String
+  userId      Int
 }
