@@ -45,7 +45,7 @@ export default function Home() {
       <div className="">
         <ol className="">
           {data?.items.edges.map(({ node }: { node: Item }) => (
-            <li>
+            <li key={node.id}>
               id={node.id} |
               uuid={node.uuid} |
               slug={node.slug} |

@@ -5,11 +5,14 @@ import PrismaPlugin from '@pothos/plugin-prisma';
 import prisma from "../lib/prisma";
 import type PrismaTypes from '@pothos/plugin-prisma/generated';
 import RelayPlugin from '@pothos/plugin-relay'
+import { createContext } from './context'
+
 
 // create schemabuilder instance
 export const builder = new SchemaBuilder<{
   // define static types
-  PrismaTypes: PrismaTypes
+  PrismaTypes: PrismaTypes,
+  Context: ReturnType<typeof createContext>,
 }>({
   // schemabuilder options
   plugins: [PrismaPlugin, RelayPlugin],
@@ -27,3 +30,7 @@ builder.queryType({
     }),
   }),
 });
+
+
+// mutation
+builder.mutationType({})
