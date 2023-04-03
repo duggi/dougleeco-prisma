@@ -8,6 +8,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 //import { typeDefs } from '../../graphql/schema'
 
 import { schema } from '../../graphql/schema'
+import { createContext } from '../../graphql/context'
 
 
 export default createYoga<{
@@ -15,6 +16,7 @@ export default createYoga<{
   res: NextApiResponse
 }>({
   schema,
+  context: createContext,
   graphqlEndpoint: '/api/graphql'
 })
 

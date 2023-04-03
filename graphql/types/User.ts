@@ -1,6 +1,7 @@
 // /graphql/types/User.ts
-
 import { builder } from "../builder";
+
+
 
 builder.prismaObject('User', {
   fields: (t) => ({
@@ -12,10 +13,10 @@ builder.prismaObject('User', {
   })
 })
 
+
 const Role = builder.enumType('Role', {
   values: ['USER', 'ADMIN'] as const,
 })
-
 
 
 // query

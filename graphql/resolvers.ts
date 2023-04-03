@@ -1,14 +1,14 @@
 // /graphql/resolvers.ts
 // using pothos instead
 
-//
-//import prisma from '../lib/prisma'
-//
-//export const resolvers = {
-//  Query: {
-//    items: () => {
-//      return prisma.item.findMany()
-//    },
+
+import prisma from '../lib/prisma'
+
+export const resolvers = {
+  Query: {
+    items: () => {
+      return prisma.item.findMany()
+    },
 //    //items: () => {
 //    //  return [
 //    //    {
@@ -27,5 +27,5 @@
 //    //    },
 //    //  ]
 //    //},
-//  },
-//}
+  },
+}

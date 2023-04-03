@@ -2,6 +2,7 @@
 
 import { PrismaClient } from '@prisma/client'
 import { items } from '../data/items'
+//import { users } from '../data/users'
 const prisma = new PrismaClient()
 
 async function main() {
@@ -27,6 +28,10 @@ async function main() {
   //    name: 'Another User',
   //  },
   //})
+
+//  await prisma.user.createMany({
+//    data: users,
+//  })
 
   await prisma.item.createMany({
     data: items,
