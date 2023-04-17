@@ -8,18 +8,22 @@ import prisma from '../lib/prisma'
 import type { GetServerSideProps } from 'next'
 import { c } from '../lib/utils'
 
+
+
 type FormValues = {
   title: string;
   slug: string;
   description: string;
+  image: FileList;
 }
 
 const CreateItemMutation = gql`
-  mutation createItem( $title: String!, $slug: String!, $description: String! ) {
-    createItem( title: $title, slug: $slug, description: $description ) {
+  mutation createItem( $title: String!, $slug: String!, $description: String!, $imageUrl: String!  ) {
+    createItem( title: $title, slug: $slug, description: $description, imageUrl: $imageUrl ) {
       title
       slug
       description
+      imageUrl
     }
   }
 `
@@ -36,9 +40,39 @@ const Admin = () => {
     onCompleted: () => reset()
   })
 
+
+  // Upload photo function
+  const uploadPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length <= 0) return
+    const file = e.target.files[0]
+    const filename = encodeURIComponent(file.name)
+    const res = await fetch(`/api/upload-image?file=${filename}`)
+    const data = await res.json()
+    const formData = new FormData()
+
+    Object.entries({ ...data.fields, file }).forEach(([key, value]) => {
+      // @ts-ignore
+      formData.append(key, value)
+    })
+
+    toast.promise(
+      fetch(data.url, {
+        method: 'POST',
+        body: formData,
+      }),
+      {
+        loading: 'Uploading...',
+        success: 'Image successfully uploaded!🎉',
+        error: `Upload failed 😥 Please try again ${error}`,
+      },
+    )
+  }
+
+
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const { title, slug, description } = data
-    const variables = { title, slug, description }
+    const { title, slug, description, image } = data
+    const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0]?.name}`
+    const variables = { title, slug, description, imageUrl }
     try {
       toast.promise(createItem({ variables }), {
         loading: 'Creating new item..',
@@ -86,6 +120,17 @@ const Admin = () => {
             className=""
           />
         </label>
+        <label className="block">
+          <span className="text-gray-700">Upload a .png or .jpg image (max 1MB).</span>
+          <input
+            {...register('image', { required: true })}
+            onChange={uploadPhoto}
+            type="file"
+            accept="image/png, image/jpeg"
+            name="image"
+          />
+        </label>
+
 
         <button
           disabled={loading}

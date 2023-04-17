@@ -10,6 +10,7 @@ builder.prismaObject('Item', {
     title: t.exposeString('title'),
     slug: t.exposeString('slug'),
     description: t.exposeString('description'),
+    imageUrl: t.exposeString('imageUrl'),
     owner: t.relation('owner'),
     ownerId: t.exposeInt('ownerId'),
   })
@@ -35,9 +36,10 @@ builder.mutationField("createItem", (t) =>
       title: t.arg.string({ required: true }),
       slug: t.arg.string({ required: true }),
       description: t.arg.string({ required: true }),
+      imageUrl: t.arg.string({}),
     },
     resolve: async (query, _parent, args, ctx) => {
-      const { title, slug, description } = args
+      const { title, slug, description, imageUrl } = args
 
       if (!(await ctx).user) {
         throw new Error("You have to be logged in to perform this action")
@@ -59,6 +61,7 @@ builder.mutationField("createItem", (t) =>
           title,
           slug,
           description,
+          imageUrl,
           ownerId: user.id,
         }
       })

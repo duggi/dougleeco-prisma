@@ -50,7 +50,7 @@ export default function Home() {
               uuid={node.uuid} |
               slug={node.slug} |
               title={node.title} |
-              description={node.description}
+              description={node.description} |
             </li>
           ))}
         </ol>
