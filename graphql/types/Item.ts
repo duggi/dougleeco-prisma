@@ -9,8 +9,12 @@ builder.prismaObject('Item', {
     uuid: t.exposeString('uuid'),
     title: t.exposeString('title'),
     slug: t.exposeString('slug'),
-    description: t.exposeString('description'),
-    imageUrl: t.exposeString('imageUrl'),
+    description: t.exposeString('description', {
+      nullable: true,
+    }),
+    imageUrl: t.exposeString('imageUrl', {
+      nullable: true,
+    }),
     owner: t.relation('owner'),
     ownerId: t.exposeInt('ownerId'),
   })

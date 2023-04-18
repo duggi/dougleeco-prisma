@@ -8,7 +8,12 @@ builder.prismaObject('User', {
     id: t.exposeID('id'),
     uuid: t.exposeString('uuid'),
     email: t.exposeString('email'),
-    imageUrl: t.exposeString('imageUrl'),
+    name: t.exposeString('name', {
+      nullable: true,
+    }),
+    imageUrl: t.exposeString('imageUrl', {
+      nullable: true,
+    }),
     role: t.expose('role', { type: Role, }),
     items: t.relation('items'),
   })
