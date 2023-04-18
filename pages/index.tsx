@@ -19,6 +19,7 @@ const AllItemsQuery = gql`
           title
           slug
           description
+          imageUrl
         }
       }
     }
@@ -33,7 +34,7 @@ export default function Home() {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
 
-  const {endCursor, hasNextPage } = data.items.pageInfo;
+  const { endCursor, hasNextPage } = data.items.pageInfo;
 
   return (
     <div>
@@ -51,6 +52,7 @@ export default function Home() {
               slug={node.slug} |
               title={node.title} |
               description={node.description} |
+              imageUrl={node.imageUrl} |
             </li>
           ))}
         </ol>
