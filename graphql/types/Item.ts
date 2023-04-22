@@ -9,25 +9,40 @@ builder.prismaObject('Item', {
     uuid: t.exposeString('uuid'),
     title: t.exposeString('title'),
     slug: t.exposeString('slug'),
-    description: t.exposeString('description', {
-      nullable: true,
-    }),
-    imageUrl: t.exposeString('imageUrl', {
-      nullable: true,
-    }),
+    description: t.exposeString('description', { nullable: true, }),
+    imageUrl: t.exposeString('imageUrl', { nullable: true, }),
     owner: t.relation('owner'),
     ownerId: t.exposeInt('ownerId'),
   })
 })
 
 
-// query
+// items query
 builder.queryField("items", (t) =>
   t.prismaConnection({
     type: 'Item',
     cursor: 'id',
     resolve: (query, _parent, _args, _ctx, _info) =>
       prisma.item.findMany({ ...query })
+  })
+)
+
+
+// item query
+builder.queryField('item', (t) =>
+  t.prismaField({
+    type: 'Item',
+    nullable: true,
+    args: {
+      id: t.arg.id({ required: true })
+    },
+    resolve: (query, _parent, args, _info) =>
+      prisma.item.findUnique({
+        ...query,
+        where: {
+          id: Number(args.id),
+        }
+      })
   })
 )
 

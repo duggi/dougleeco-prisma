@@ -1,3 +1,4 @@
+import Link from 'next/Link'
 import Head from 'next/head';
 //import { DougLeeCo } from '../components/DougLeeCo';
 //import { items } from '../data/items';
@@ -53,6 +54,9 @@ export default function Home() {
               title={node.title} |
               description={node.description} |
               imageUrl={node.imageUrl} |
+              <Link href={`/item/${node.id}`}>
+                View
+              </Link>
             </li>
           ))}
         </ol>
