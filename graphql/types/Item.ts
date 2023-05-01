@@ -1,5 +1,6 @@
 // /graphql/types/Item.ts
 import { builder } from "../builder";
+import { c } from "/lib/utils"
 
 
 
@@ -83,6 +84,52 @@ builder.mutationField("createItem", (t) =>
           imageUrl,
           ownerId: user.id,
         }
+      })
+    }
+  })
+)
+
+
+// mutation update
+builder.mutationField("updateItem", (t) =>
+  t.prismaField({
+    type: 'Item',
+    args: {
+      id: t.arg.id({ required: true }),
+      title: t.arg.string({ required: true }),
+      slug: t.arg.string({ required: true }),
+      description: t.arg.string(),
+      imageUrl: t.arg.string(),
+    },
+    resolve: async (query, _parent, args, ctx) => {
+      const { id, title, slug, description, imageUrl } = args
+
+      if (!(await ctx).user) {
+        throw new Error("You have to be logged in to perform this action")
+      }
+
+      const user = await prisma.user.findUnique({
+        where: {
+          email: (await ctx).user?.email,
+        }
+      })
+
+      if (!user || user.role !== "ADMIN") {
+        throw new Error("You don't have permission to perform this action")
+      }
+
+      return prisma.item.update({
+        ...query,
+        where: {
+          id: Number(id),
+        },
+        data: {
+          title,
+          slug,
+          description: description ? description : null,
+          imageUrl: imageUrl ? imageUrl : null,
+          ownerId: user.id,
+        },
       })
     }
   })
