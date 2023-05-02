@@ -103,10 +103,6 @@ const AdminUpdate = ({ item }: InferGetServerSidePropsType<typeof getServerSideP
     }
 
     const variables = { id, title, slug, description, imageUrl }
-    c(data, "submitted data")
-    c(typeof image, "image type")
-    c(variables, "variables")
-    c(item.imageUrl, "imageUrl db")
 
     try {
       toast.promise(updateItem({ variables }), {
