@@ -55,7 +55,10 @@ export default function Home() {
               description={node.description} |
               imageUrl={node.imageUrl} |
               <Link href={`/item/${node.id}`}>
-                View
+                View |
+              </Link>
+              <Link href={`/admin/item/edit/${node.id}`}>
+                Edit
               </Link>
             </li>
           ))}

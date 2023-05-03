@@ -7,28 +7,28 @@ const Header = () => {
   return (
     <header className="">
       <div className="">
-        <Link href="/" className="">
-          Home
-        </Link>
         <nav className="">
+        <Link href="/" className="">
+          Home |
+        </Link>
           {user ? (
-            <div className="">
-              <div>
+            <>
+              <span>
                 {user.name},
-                {user.uuid}
-              </div>
-              <Link href="/admin" className="">
-                  Admin
+                {user.uuid} |
+              </span>
+              <Link href="/admin/item/create" className="">
+                  Add Item
               </Link>
-              /
+              |
               <Link href="/api/graphql" className="">
                   GraphQL
               </Link>
-              /
+              |
               <Link href="/api/auth/logout"  className="">
                   Logout
               </Link>
-            </div>
+            </>
           ) : (
             <Link href="/api/auth/login" className="">
                 Login

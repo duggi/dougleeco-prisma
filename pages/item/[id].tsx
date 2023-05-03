@@ -7,30 +7,8 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 
 
-//const UpdateItemMutation = gql`
-//  mutation ($id: ID!) {
-//    updateItem(id: $id) {
-//      title
-//      slug
-//      description
-//      imageUrl
-//    }
-//  }
-//`
-
 const Item = ({ item }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [isLoading, setIsLoading] = useState(false);
-  //const [updateItem] = useMutation(UpdateItemMutation);
-
-  //const bookmark = async () => {
-  //  setIsLoading(true);
-  //  toast.promise(createBookmark({ variables: { id: link.id } }), {
-  //    loading: 'working on it',
-  //    success: 'Saved successfully! 🎉',
-  //    error: `Something went wrong 😥 Please try again`,
-  //  });
-  //  setIsLoading(false);
-  //};
 
   return (
     <div>
