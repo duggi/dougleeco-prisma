@@ -55,8 +55,8 @@ builder.mutationField("createItem", (t) =>
     args: {
       title: t.arg.string({ required: true }),
       slug: t.arg.string({ required: true }),
-      description: t.arg.string({ required: true }),
-      imageUrl: t.arg.string({}),
+      description: t.arg.string(),
+      imageUrl: t.arg.string(),
     },
     resolve: async (query, _parent, args, ctx) => {
       const { title, slug, description, imageUrl } = args
@@ -80,8 +80,8 @@ builder.mutationField("createItem", (t) =>
         data: {
           title,
           slug,
-          description,
-          imageUrl,
+          description: description ? description : null,
+          imageUrl: imageUrl ? imageUrl : null,
           ownerId: user.id,
         }
       })

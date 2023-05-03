@@ -17,7 +17,7 @@ const Header = () => {
                 {user.name},
                 {user.uuid} |
               </span>
-              <Link href="/admin" className="">
+              <Link href="/admin/item/create" className="">
                   Add Item
               </Link>
               |

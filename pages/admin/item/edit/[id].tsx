@@ -99,7 +99,7 @@ const AdminUpdate = ({ item }: InferGetServerSidePropsType<typeof getServerSideP
     if (image === '') { imageUrl = '' }
     if (typeof image === 'object') {
       imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}` +
-                  `.s3.amazonaws.com/${image[0]?.name}`
+                 `.s3.amazonaws.com/${image[0]?.name}`
     }
 
     const variables = { id, title, slug, description, imageUrl }
