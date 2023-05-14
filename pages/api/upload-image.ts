@@ -1,6 +1,7 @@
 // pages/api/upload-image.ts
 import aws from 'aws-sdk'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { c } from '../../lib/utils'
 
 
 
@@ -23,6 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       Bucket: process.env.AWS_S3_BUCKET_NAME,
       Fields: {
         key: req.query.file,
+        'content-type': req.query.contenttype,
       },
       Expires: 60,
       Conditions: [
@@ -31,6 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     return res.status(200).json(post)
+
   } catch (error) {
     console.log(error)
   }
