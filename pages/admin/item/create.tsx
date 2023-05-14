@@ -41,13 +41,12 @@ const Admin = () => {
     onCompleted: () => reset()
   })
 
-
   // Upload photo function
   const uploadPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length <= 0) return
     const file = e.target.files[0]
     const filename = encodeURIComponent(file.name)
-    const res = await fetch(`/api/upload-image?file=${filename}`)
+    const res = await fetch(`/api/upload-image?file=${filename}&content_type=${file.type}`)
     const data = await res.json()
     const formData = new FormData()
 
@@ -68,7 +67,6 @@ const Admin = () => {
       },
     )
   }
-
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const { title, slug, description, image } = data
@@ -166,7 +164,6 @@ export default Admin
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req, res);
-
   if (!session) {
     return {
       redirect: {
@@ -176,7 +173,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       props: {},
     }
   }
-
   return {
     props: {},
   };
