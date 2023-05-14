@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       Bucket: process.env.AWS_S3_BUCKET_NAME,
       Fields: {
         key: req.query.file,
-        'content-type': req.query.contenttype,
+        'content-type': req.query.content_type,
       },
       Expires: 60,
       Conditions: [

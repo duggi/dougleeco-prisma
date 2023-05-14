@@ -46,7 +46,7 @@ const Admin = () => {
     if (!e.target.files || e.target.files.length <= 0) return
     const file = e.target.files[0]
     const filename = encodeURIComponent(file.name)
-    const res = await fetch(`/api/upload-image?file=${filename}&contenttype=${file.type}`)
+    const res = await fetch(`/api/upload-image?file=${filename}&content_type=${file.type}`)
     const data = await res.json()
     const formData = new FormData()
 
