@@ -5,6 +5,8 @@ import Head from 'next/head';
 import { gql, useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import type { Item } from '@prisma/client';
 
+
+
 const AllItemsQuery = gql`
   query allItemsQuery($first: Int, $after: ID) {
     items(first: $first, after: $after) {
@@ -27,14 +29,12 @@ const AllItemsQuery = gql`
   }
 `
 
-export default function Home() {
+export default function ItemsAdmin() {
   const { data, loading, error, fetchMore } = useQuery(AllItemsQuery, {
     variables: { first: 30 },
   });
-
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
-
   const { endCursor, hasNextPage } = data.items.pageInfo;
 
   return (
@@ -54,7 +54,7 @@ export default function Home() {
               title={node.title} |
               description={node.description} |
               imageUrl={node.imageUrl} |
-              <Link href={`/item/${node.id}`}>
+              <Link href={`/admin/item/${node.id}`}>
                 View |
               </Link>
               <Link href={`/admin/item/edit/${node.id}`}>
@@ -63,7 +63,6 @@ export default function Home() {
             </li>
           ))}
         </ol>
-
 
         {hasNextPage ? (
           <button
@@ -88,7 +87,6 @@ export default function Home() {
             End of results{" "}
           </p>
         )}
-
 
       </div>
     </div>

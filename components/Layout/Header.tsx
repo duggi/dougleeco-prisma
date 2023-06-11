@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import { useUser } from '@auth0/nextjs-auth0/client'
 
+
+
 const Header = () => {
   const { user } = useUser()
   return (
@@ -13,10 +15,12 @@ const Header = () => {
         </Link>
           {user ? (
             <>
-              <span>
-                {user.name},
-                {user.uuid} |
-              </span>
+              <Link href="/admin" className="">
+                Admin Home |
+              </Link>
+              <Link href="/admin/item" className="">
+                Items Admin |
+              </Link>
               <Link href="/admin/item/create" className="">
                   Add Item
               </Link>
@@ -28,6 +32,10 @@ const Header = () => {
               <Link href="/api/auth/logout"  className="">
                   Logout
               </Link>
+              <span>
+                {user.name},
+                {user.uuid} |
+              </span>
             </>
           ) : (
             <Link href="/api/auth/login" className="">
@@ -36,6 +44,7 @@ const Header = () => {
           )}
         </nav>
       </div>
+      <hr />
     </header>
   );
 };
