@@ -1,3 +1,4 @@
+import '../styles/dlco.css'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
 import Layout from '../components/Layout';
 import { ApolloProvider } from '@apollo/client'
