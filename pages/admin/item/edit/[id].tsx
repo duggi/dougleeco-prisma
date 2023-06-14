@@ -1,13 +1,13 @@
-// pages/admin.tsx
 import React from 'react'
 import { useState } from 'react';
 import type { GetServerSideProps } from 'next'
-import { gql, useMutation } from '@apollo/client'
-import toast, { Toaster } from 'react-hot-toast'
-import { type SubmitHandler, useForm } from 'react-hook-form'
-import { getSession } from '@auth0/nextjs-auth0'
 import prisma from '/lib/prisma'
+import { getSession } from '@auth0/nextjs-auth0'
+import { gql, useMutation } from '@apollo/client'
+import { type SubmitHandler, useForm } from 'react-hook-form'
+import toast, { Toaster } from 'react-hot-toast'
 import { c } from '/lib/utils'
+
 
 
 type FormValues = {
@@ -18,8 +18,16 @@ type FormValues = {
 }
 
 const UpdateItemMutation = gql`
-  mutation updateItem( $id: ID!, $title: String!, $slug: String!, $description: String!, $imageUrl: String!  ) {
-    updateItem( id: $id, title: $title, slug: $slug, description: $description, imageUrl: $imageUrl ) {
+  mutation updateItem( $id: ID!,
+                       $title: String!,
+                       $slug: String!,
+                       $description: String!,
+                       $imageUrl: String! ) {
+    updateItem( id: $id,
+                title: $title,
+                slug: $slug,
+                description: $description,
+                imageUrl: $imageUrl ) {
       title
       slug
       description
@@ -28,18 +36,13 @@ const UpdateItemMutation = gql`
   }
 `
 
-const AdminUpdate = ({ item }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  c(item, "ITEM SSP")
+const AdminItemUpdate = ({ item }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const defaultDescription = item.description ?
                              item.description :
                              ''
   const defaultImage = item.imageUrl ?
                        item.imageUrl :
                        ''
-
-  c(defaultDescription, "DESCR")
-  c(defaultImage, "IMAGE")
-
   const {
     register,
     handleSubmit,
@@ -63,16 +66,14 @@ const AdminUpdate = ({ item }: InferGetServerSidePropsType<typeof getServerSideP
     if (!e.target.files || e.target.files.length <= 0) return
     const file = e.target.files[0]
     const filename = encodeURIComponent(file.name)
-    const res = await fetch(`/api/upload-image?file=${filename}`)
+    const res = await fetch(`/api/upload-image?file=${filename}&content_type=${file.type}`)
     const data = await res.json()
     const formData = new FormData()
 
     Object.entries({ ...data.fields, file }).forEach(([key, value]) => {
       // @ts-ignore
       formData.append(key, value)
-      c(formData, "IMAGE FORMDATA")
     })
-
 
     toast.promise(
       fetch(data.url, {
@@ -129,8 +130,7 @@ const AdminUpdate = ({ item }: InferGetServerSidePropsType<typeof getServerSideP
             type="text"
             className=""
           />
-        <
-        /label>
+        </label>
         <label className="">
           <span className="">Slug</span>
           <input
@@ -188,7 +188,7 @@ const AdminUpdate = ({ item }: InferGetServerSidePropsType<typeof getServerSideP
   )
 }
 
-export default AdminUpdate
+export default AdminItemUpdate
 
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
