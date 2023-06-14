@@ -1,10 +1,13 @@
+import "/styles/dlco-admin.css"
 import { UserProvider } from '@auth0/nextjs-auth0/client'
-import Layout from '../components/Layout';
+import Layout from '../components/Layout'
 import { ApolloProvider } from '@apollo/client'
 import apolloClient from '../lib/apollo'
-import type { AppProps } from 'next/app';
+import type { AppProps } from 'next/app'
 
-function DougLeeCoApp({ Component, pageProps }: AppProps) {
+
+
+function DlcoAdminApp({ Component, pageProps }: AppProps) {
   return (
     <UserProvider>
       <ApolloProvider client={apolloClient}>
@@ -16,4 +19,4 @@ function DougLeeCoApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default DougLeeCoApp;
+export default DlcoAdminApp;

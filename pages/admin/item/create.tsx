@@ -1,12 +1,11 @@
-// pages/admin.tsx
 import React from 'react'
-import { type SubmitHandler, useForm } from 'react-hook-form'
-import { gql, useMutation } from '@apollo/client'
-import toast, { Toaster } from 'react-hot-toast'
-import { getSession } from '@auth0/nextjs-auth0'
-import prisma from '../../../lib/prisma'
 import type { GetServerSideProps } from 'next'
-import { c } from '../../../lib/utils'
+import prisma from '/lib/prisma'
+import { getSession } from '@auth0/nextjs-auth0'
+import { gql, useMutation } from '@apollo/client'
+import { type SubmitHandler, useForm } from 'react-hook-form'
+import toast, { Toaster } from 'react-hot-toast'
+import { c } from '/lib/utils'
 
 
 
@@ -18,8 +17,14 @@ type FormValues = {
 }
 
 const CreateItemMutation = gql`
-  mutation createItem( $title: String!, $slug: String!, $description: String!, $imageUrl: String!  ) {
-    createItem( title: $title, slug: $slug, description: $description, imageUrl: $imageUrl ) {
+  mutation createItem( $title: String!,
+                       $slug: String!,
+                       $description: String!,
+                       $imageUrl: String! ) {
+    createItem( title: $title,
+                slug: $slug,
+                description: $description,
+                imageUrl: $imageUrl ) {
       title
       slug
       description
@@ -28,14 +33,13 @@ const CreateItemMutation = gql`
   }
 `
 
-const Admin = () => {
+const AdminItemCreate = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<FormValues>()
-
 
   const [createItem, { loading, error }] = useMutation(CreateItemMutation, {
     onCompleted: () => reset()
@@ -160,7 +164,8 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default AdminItemCreate
+
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req, res);
