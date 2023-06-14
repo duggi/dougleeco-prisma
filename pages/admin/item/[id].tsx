@@ -7,7 +7,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 
 
-const Item = ({ item }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const AdminItemView = ({ item }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -22,7 +22,7 @@ const Item = ({ item }: InferGetServerSidePropsType<typeof getServerSideProps>) 
   );
 };
 
-export default Item;
+export default AdminItemView;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params?.id;
