@@ -87,7 +87,6 @@ export default function ItemsAdmin() {
             End of results{" "}
           </p>
         )}
-
       </div>
     </div>
   );
