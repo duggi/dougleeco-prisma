@@ -1,3 +1,4 @@
+// Item READ
 import React from 'react';
 import prisma from '../../../lib/prisma';
 import { useState } from 'react';
@@ -7,7 +8,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 
 
-const AdminItemView = ({ item }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const AdminItemRead = ({ item }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -22,7 +23,9 @@ const AdminItemView = ({ item }: InferGetServerSidePropsType<typeof getServerSid
   );
 };
 
-export default AdminItemView;
+export default AdminItemRead;
+
+
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params?.id;
