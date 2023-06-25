@@ -1,7 +1,6 @@
+// Items INDEX
 import Link from 'next/Link'
 import Head from 'next/head';
-//import { DougLeeCo } from '../components/DougLeeCo';
-//import { items } from '../data/items';
 import { gql, useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import type { Item } from '@prisma/client';
 
@@ -29,9 +28,9 @@ const AllItemsQuery = gql`
   }
 `
 
-export default function ItemsAdmin() {
+export default function AdminItemsIndex() {
   const { data, loading, error, fetchMore } = useQuery(AllItemsQuery, {
-    variables: { first: 30 },
+    variables: { first: 60 },
   });
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
@@ -57,7 +56,7 @@ export default function ItemsAdmin() {
               <Link href={`/admin/item/${node.id}`}>
                 View |
               </Link>
-              <Link href={`/admin/item/edit/${node.id}`}>
+              <Link href={`/admin/item/update/${node.id}`}>
                 Edit
               </Link>
             </li>
