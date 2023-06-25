@@ -30,7 +30,7 @@ const AllItemsQuery = gql`
 
 export default function AdminItemsIndex() {
   const { data, loading, error, fetchMore } = useQuery(AllItemsQuery, {
-    variables: { first: 30 },
+    variables: { first: 60 },
   });
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
