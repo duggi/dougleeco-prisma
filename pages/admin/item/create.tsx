@@ -16,7 +16,7 @@ const AdminItemCreate = () => {
     <div className="">
       <Toaster />
       <h1 className="">Create a new item</h1>
-      <AdminItemCreateUpdate />
+      <AdminItemCreateUpdate item={null} />
     </div>
   )
 }

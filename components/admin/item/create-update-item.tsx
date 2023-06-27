@@ -11,10 +11,23 @@ import { c } from '@/lib/utils'
 
 
 type FormValues = {
+  id: number;
   title: string;
   slug: string;
   description: string;
   image: FileList;
+  [key: string]: any;
+}
+
+type ItemProps = {
+  item?: {
+    id: number;
+    title: string;
+    slug: string;
+    description?: string;
+    imageUrl?: string;
+    [key: string]: any;
+  }
 }
 
 const uploadMessages = {
@@ -53,9 +66,11 @@ const submitMessages = {
 
 
 
-const AdminItemCreateUpdate = (props) => {
+const AdminItemCreateUpdate = (props: ItemProps) => {
   const item = props?.item
   const mode = item ? 'update' : 'create'
+
+  c(props, "props")
 
   let typeArgs = `
     $title: String!,
@@ -97,8 +112,8 @@ const AdminItemCreateUpdate = (props) => {
   if (mode === 'update') {
     defaultVals = {
       defaultValues: {
-        title: item.title,
-        slug: item.slug,
+        title: item?.title,
+        slug: item?.slug,
         description: defaultDescription,
         image: defaultImage
       }
@@ -157,10 +172,14 @@ const AdminItemCreateUpdate = (props) => {
       imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0]?.name}`
     }
 
-    let variables = { title, slug, description, imageUrl }
+    let variables
     if(mode === 'update') {
-      const id = item.id
-      variables = { id, ...variables }
+      const id = item?.id
+      //variables = { id, ...variables }
+      variables = { id, title, slug, description, imageUrl }
+    }
+    else {
+      variables = { title, slug, description, imageUrl }
     }
 
     try {

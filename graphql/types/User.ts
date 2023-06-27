@@ -1,4 +1,5 @@
-// /graphql/types/User.ts
+// @ts-nocheck
+
 import { builder } from "@/graphql/builder";
 
 

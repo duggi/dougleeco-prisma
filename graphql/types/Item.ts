@@ -1,4 +1,5 @@
-// /graphql/types/Item.ts
+// @ts-nocheck
+
 import { builder } from "@/graphql/builder";
 import { c } from "@/lib/utils"
 
@@ -12,7 +13,7 @@ builder.prismaObject('Item', {
     slug: t.exposeString('slug'),
     description: t.exposeString('description', { nullable: true, }),
     imageUrl: t.exposeString('imageUrl', { nullable: true, }),
-    owner: t.relation('owner'),
+    owner: t.relation('owner', {}),
     ownerId: t.exposeInt('ownerId'),
   })
 })

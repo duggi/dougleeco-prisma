@@ -1,4 +1,4 @@
-// graphql/builder.ts
+// @ts-nocheck
 
 import SchemaBuilder from "@pothos/core";
 import PrismaPlugin from '@pothos/plugin-prisma';

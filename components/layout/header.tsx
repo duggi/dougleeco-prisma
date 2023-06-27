@@ -33,8 +33,7 @@ const Header = () => {
                   Logout
               </Link>
               <span>
-                {user.name},
-                {user.uuid} |
+                {user.name}
               </span>
             </>
           ) : (
