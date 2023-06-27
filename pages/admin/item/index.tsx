@@ -1,5 +1,5 @@
 // Items INDEX
-import Link from 'next/Link'
+import Link from 'next/link'
 import Head from 'next/head';
 import { gql, useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import type { Item } from '@prisma/client';
