@@ -1,7 +1,7 @@
 // graphql/schema.ts
 
-import "./types/Item"
-import "./types/User"
+import "@/graphql/types/Item"
+import "@/graphql/types/User"
 import { builder } from "./builder";
 
 export const schema = builder.toSchema()

@@ -1,5 +1,5 @@
 // pages/api/auth/hook.ts
-import  prisma from '../../../lib/prisma';
+import  prisma from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 

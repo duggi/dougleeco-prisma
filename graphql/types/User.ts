@@ -1,5 +1,5 @@
 // /graphql/types/User.ts
-import { builder } from "../builder";
+import { builder } from "@/graphql/builder";
 
 
 

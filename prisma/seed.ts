@@ -1,8 +1,8 @@
 // prisma/seed.ts
 
 import { PrismaClient } from '@prisma/client'
-import { items } from '../data/items'
-//import { users } from '../data/users'
+import { items } from '@/data/items'
+//import { users } from '@/data/users'
 const prisma = new PrismaClient()
 
 async function main() {

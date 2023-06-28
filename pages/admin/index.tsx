@@ -1,8 +1,5 @@
 import Link from 'next/link'
 import Head from 'next/head';
-//import { DougLeeCo } from '../components/DougLeeCo';
-//import { items } from '../data/items';
-//import type { Item } from '@prisma/client';
 
 
 

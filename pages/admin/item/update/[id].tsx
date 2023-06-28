@@ -1,12 +1,12 @@
 // Item UPDATE
 import React from 'react'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import prisma from '/lib/prisma'
+import prisma from '@/lib/prisma'
 import { getSession } from '@auth0/nextjs-auth0'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import toast, { Toaster } from 'react-hot-toast'
-import AdminItemCreateUpdate from '/components/admin/item/create-update-item'
-import { c } from '/lib/utils'
+import AdminItemCreateUpdate from '@/components/admin/item/create-update-item'
+import { c } from '@/lib/utils'
 
 
 
