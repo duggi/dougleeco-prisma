@@ -1,7 +1,6 @@
-// pages/api/upload-image.ts
 import aws from 'aws-sdk'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { c } from '../../lib/utils'
+import { c } from '@/lib/utils'
 
 
 

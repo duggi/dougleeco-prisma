@@ -1,12 +1,12 @@
 // Item CREATE OR UPDATE
 import React from 'react'
 import type { GetServerSideProps } from 'next'
-import prisma from '/lib/prisma'
+import prisma from '@/lib/prisma'
 import { getSession } from '@auth0/nextjs-auth0'
 import { gql, useMutation } from '@apollo/client'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import toast, { Toaster } from 'react-hot-toast'
-import { c } from '/lib/utils'
+import { c } from '@/lib/utils'
 
 
 

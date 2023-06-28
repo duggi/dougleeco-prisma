@@ -1,6 +1,6 @@
 // /graphql/types/Item.ts
-import { builder } from "../builder";
-import { c } from "/lib/utils"
+import { builder } from "@/graphql/builder";
+import { c } from "@/lib/utils"
 
 
 
